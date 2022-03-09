@@ -17,7 +17,6 @@ climate_data = pd.read_csv("https://raw.githubusercontent.com/CSE5544/data/main/
 df = climate_data.replace("..", np.nan)
 # Convert columns of string type to float
 df[df.columns[2:33]] = df[df.columns[2:33]].astype('float')
-st.write(df)
 
 # Transform the orginal df into its "long form" df2, convenient for altair plot
 df2 = df.drop(columns=['Non-OECD Economies'])
@@ -118,16 +117,18 @@ country_stats3 = country_stats3[country_stats3["country"] != "OECD - Total"]
 country_stats3.sort_values(by=["mean"], ascending=False, inplace=True)
 country_stats3 = country_stats3.iloc[0:10, :]
 radial1 = alt.Chart(country_stats3).encode(
-    theta = alt.Theta("mean:Q", stack = True),
-    radius = alt.Radius("mean:Q", scale = alt.Scale(type="linear", zero=True, rangeMin=20)),
+    theta = alt.Theta("ln(mean):Q", stack = True),
+    radius = alt.Radius("ln(mean):Q", scale = alt.Scale(type="linear", zero=True, rangeMin=20)),
     color="country:N",
 ).properties(
-    title = 'Radial Chart with mean as theta and mean as radius for the top 10 countries'
+    title = 'Radial Chart with ln(mean) as angel theta & radius for the top 10 countries'
 )
 c1 = radial1.mark_arc(innerRadius=20, stroke="#fff")
 c2 = radial1.mark_text(radiusOffset=10).encode(text="country:N")
 st.altair_chart(c1 + c2, use_container_width = True)
-
+st.write("The radial chart above is honest. Though angel theta and radius are used as channels to encode \
+    ln(mean), the difference between ln(mean) is a lot less than that between mean. Thus, this chart basically \
+        reveals the truth, no visual deception here.")
 
 
 
@@ -182,15 +183,18 @@ st.write("The heatmap above is deceiving because color(brightness) is used as ch
         as ordinal when construct the plot.")
 
 
+
 # Radial Chart - country_stats3
 radial1 = alt.Chart(country_stats3).encode(
-    theta = alt.Theta("ln(mean):Q", stack = True),
-    radius = alt.Radius("ln(mean):Q", scale = alt.Scale(type="linear", zero=True, rangeMin=20)),
-    color="country:N",
+    theta = alt.Theta("mean:Q", stack = True),
+    radius = alt.Radius("mean:Q", scale = alt.Scale(type="linear", zero=True, rangeMin=20)),
+    color="country:N"
 ).properties(
-    title = 'Radial Chart with ln(mean) as theta and ln(mean) as radius for the top 10 countries'
+    title = 'Radial Chart with mean as angel theta & radius for the top 10 countries'
 )
 c1 = radial1.mark_arc(innerRadius=20, stroke="#fff")
 c2 = radial1.mark_text(radiusOffset=10).encode(text="country:N")
 st.altair_chart(c1 + c2, use_container_width = True)
-
+st.write("The readial chart above is somehow deceiving. Since we use the values of mena as radius and angels theta, \
+    instead of only use angle as channel to encode the mean of top countries, this radial chart exaggerates the \
+        actual mean different between countries, gives users a sense of huge mean different between countries.")
