@@ -54,7 +54,7 @@ heatmap2 = alt.Chart(df3).mark_rect().encode(
 ).properties(
     title = 'ln(emission) Level of Each Country from 1990 to 2019'
 )
-st.altair_chart(heatmap2, use_container_width = True)
+st.altair_chart(heatmap2.interactive(), use_container_width = True)
 st.write("The heatmap above is more truthful and intuitive than the heatmap in Part 2, because we have a clear titel \
     and labels on both X and Y axis. We take the natural log of all emission levels, which makes the whole plot easier \
         to find patterns and trend across years or between different countries. I also add tooltip so that users could \
@@ -87,7 +87,7 @@ heatmap3 = alt.Chart(country_stats1).mark_bar().encode(
 ).properties(
     title = 'ln(Mean) of Emission vs ln(Std) of Emission for All Countries'
 )
-st.altair_chart(heatmap3, use_container_width = True)
+st.altair_chart(heatmap3.interactive(), use_container_width = True)
 st.write("The heatmap above is honest. To reveal any potential relationship between the ln(mean) and ln(std), we use \
     color(hue) as channel to encode different countries. As we can see, it seems like there's a positive linear \
         association between ln(mean) and ln(std), which is a very interesting insight. It implies that countries \
@@ -181,7 +181,7 @@ heatmap4 = alt.Chart(country_stats1).mark_bar().encode(
 ).properties(
     title = 'ln(Mean) of Emission vs ln(Std) of Emission for All Countries'
 )
-st.altair_chart(heatmap4, use_container_width = True)
+st.altair_chart(heatmap4.interactive(), use_container_width = True)
 st.write("The heatmap above is deceiving because color(brightness) is used as channel to encode country, which gives \
     users a useless order information: alphabetical order by countries' names. This happens because we treat 'country' \
         as ordinal when construct the plot.")
