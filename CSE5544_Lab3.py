@@ -97,13 +97,15 @@ st.write("The heatmap above is honest. To reveal any potential relationship betw
 # Line chart - country_stats
 line1 = alt.Chart(country_stats1).mark_line().encode(
     alt.X('country:N'),
-    alt.Y('mean:Q')
+    alt.Y('mean:Q'),
+    tooltip = ['country', 'mean']
 ).properties(
     title = 'Mean of Emission for All Countries During the Last 30 Years'
 )
 line2 = alt.Chart(country_stats1).mark_line().encode(
     alt.X('country:N'),
-    alt.Y('std:Q')
+    alt.Y('std:Q'),
+    tooltip = ['country', 'std']
 ).properties(
     title = 'Std of Emission for All Countries During the Last 30 Years'
 )
@@ -120,6 +122,7 @@ radial1 = alt.Chart(country_stats3).encode(
     theta = alt.Theta("ln(mean):Q", stack = True),
     radius = alt.Radius("ln(mean):Q", scale = alt.Scale(type="linear", zero=True, rangeMin=20)),
     color="country:N",
+    tooltip = ['country', 'ln(mean)']
 ).properties(
     title = 'Radial Chart with ln(mean) as angel theta & radius for the top 10 countries'
 )
@@ -157,7 +160,8 @@ st.write("The heatmap above is somehow deceiving. The first reason is that we di
 scatterplot2 = alt.Chart(country_stats1.iloc[0:15,:]).mark_circle().encode(
     alt.X('ln(mean):Q', bin=alt.BinParams(maxbins=30)),
     alt.Y('ln(std):Q', bin=alt.BinParams(maxbins=30)),
-    alt.Size('country:N')
+    alt.Size('country:N'),
+    tooltip = ['country', 'ln(mean)', 'ln(std)']
 ).properties(
     title = 'Top 15 Average Emission Countries'
 )
@@ -188,7 +192,8 @@ st.write("The heatmap above is deceiving because color(brightness) is used as ch
 radial1 = alt.Chart(country_stats3).encode(
     theta = alt.Theta("mean:Q", stack = True),
     radius = alt.Radius("mean:Q", scale = alt.Scale(type="linear", zero=True, rangeMin=20)),
-    color="country:N"
+    color="country:N",
+    tooltip = ['country', 'mean']
 ).properties(
     title = 'Radial Chart with mean as angel theta & radius for the top 10 countries'
 )
