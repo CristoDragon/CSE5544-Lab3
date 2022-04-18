@@ -129,7 +129,7 @@ with panel2:
         st.markdown("<div style='text-align: center;'><span style='color: #000000; font-size:1.0rem; font-weight:bold'>Public:Private</span></div>", unsafe_allow_html=True)
         st.markdown("<div style='text-align: center;'><span style='color: #681a49; font-size:1.5rem; font-weight:bold'>4.5:1</span></div>", unsafe_allow_html=True)
     # For the second column, we create a barplot
-    with columns[1]:
+    with columns[2]:
         t = alt.TitleParams("# of Universities in All Continents", subtitle=["Bar Chart"])
         bar = alt.Chart(type_data, title=t).mark_bar().encode(
             x = alt.X('count(region):Q', axis=alt.Axis(labelAngle=45)),
@@ -139,7 +139,7 @@ with panel2:
         )
         st.altair_chart(bar, use_container_width = True)
     # For the third column, we create a layered histogram
-    with columns[2]:
+    with columns[1]:
         # Create a histogram to show the distribution of faculty_count
         t = alt.TitleParams("The Distribution of faculty_count", subtitle=["Layered Histogram"])
         hist1 = alt.Chart(type_data, title=t).mark_bar(
