@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import altair as alt
-import plotly.express as px
 from dataclasses import field
 import datetime
 from matplotlib.colors import ListedColormap
