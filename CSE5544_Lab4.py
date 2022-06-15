@@ -10,6 +10,7 @@ from matplotlib.colors import ListedColormap
 plt.rcParams['axes.edgecolor']='#FA6E4F'
 plt.rcParams['font.family'] = 'monospace'
 import re
+from vega_datasets import data
 
 
 
@@ -165,8 +166,6 @@ country_codes.set_index('English short name', inplace = True)
 #Reading file 
 university_df = pd.read_csv('https://raw.githubusercontent.com/Dr-Banana/CSE5544/main/Zhang_10419_lab4_code/qs-world-university-rankings-2017-to-2022-V2.csv' ,sep=',', encoding='latin-1')
 
-
-from vega_datasets import data
 
 def draw_map(mtype,y):
     
